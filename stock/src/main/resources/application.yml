@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: stock
+  datasource:
+    url: jdbc:mariadb://mysql-flodr.alwaysdata.net/flodr_stockdb
+    username: flodr
+    password: --mo2pass
+    driver-class-name: org.mariadb.jdbc.Driver
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+mqtt:
+  broker:
+    url: tcp://localhost:1883 #securise , sinon 8883
+  client:
+    id: stock-app
+  username: user-app
+  password: --mo2pass
+
+
+
