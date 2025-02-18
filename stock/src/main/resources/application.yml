@@ -17,6 +17,7 @@ mqtt:
     id: stock-app
   username: user-app
   password: --mo2pass
-
+server:
+  port: 8081
 
 
