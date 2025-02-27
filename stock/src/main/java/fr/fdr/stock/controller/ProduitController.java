@@ -12,16 +12,22 @@ import java.util.List;
 @RequestMapping("/api/produit")
 public class ProduitController {
 
+
     @Autowired
     private ProduitService produitService;
 
     @PostMapping
-    public void createProduit(@Valid @RequestBody Produit produit) {}
+    public void createProduit(@Valid @RequestBody Produit produit) {
+        this.produitService.createProduit(produit);
+    }
 
     @GetMapping
     public List<Produit> getAllProduits() {
         return this.produitService.getAllProduit();
     }
 
-
+    @DeleteMapping("/{id}")
+    public void deleteProduitById(@PathVariable("id") Long id) {
+        this.produitService.deleteProduitById(id);
+    }
 }

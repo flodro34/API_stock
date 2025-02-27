@@ -5,11 +5,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.Size;
-import lombok.Getter;
-import lombok.Setter;
 
-@Getter
-@Setter
+
 @Entity
 public class Produit {
 
@@ -33,4 +30,44 @@ public class Produit {
     }
 
     public Produit() {}
+
+    public Long getProduit_id() {
+        return produit_id;
+    }
+
+    public void setProduit_id(Long produit_id) {
+        this.produit_id = produit_id;
+    }
+
+    public @Size(min = 5, max = 50, message = "la taille doit être entre 10 et 50") String getNom() {
+        return nom;
+    }
+
+    public void setNom(@Size(min = 5, max = 50, message = "la taille doit être entre 10 et 50") String nom) {
+        this.nom = nom;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Float getPrix() {
+        return prix;
+    }
+
+    public void setPrix(Float prix) {
+        this.prix = prix;
+    }
+
+    public Integer getQuantite() {
+        return quantite;
+    }
+
+    public void setQuantite(Integer quantite) {
+        this.quantite = quantite;
+    }
 }
