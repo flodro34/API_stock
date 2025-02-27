@@ -1,2 +1,4 @@
-package fr.fdr.stock.configuration;public class OpenApiConfig {
+package fr.fdr.stock.configuration;
+
+public class OpenApiConfig {
 }
