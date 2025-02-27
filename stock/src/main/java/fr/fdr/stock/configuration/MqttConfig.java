@@ -1,8 +1,7 @@
 package fr.fdr.stock.configuration;
 
-import org.eclipse.paho.client.mqttv3.MqttClient;
-import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
-import org.eclipse.paho.client.mqttv3.MqttException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.eclipse.paho.client.mqttv3.*;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -34,6 +33,30 @@ public class MqttConfig {
         options.setUserName(username);
         options.setPassword(password.toCharArray());
         mqttClient.connect(options);
+
+        //callback
+        mqttClient.setCallback(new MqttCallback() {
+
+            @Override
+            public void connectionLost(Throwable throwable) {
+                System.out.println("Connexion perdue : " + throwable.getMessage());
+            }
+
+            @Override
+            public void messageArrived(String topic, MqttMessage mqttMessage) throws Exception {
+                System.out.println("Message reçu du topic : " + topic);
+                String payload = new String(mqttMessage.getPayload());
+
+                //serialiser le message recu en objet java
+                ObjectMapper objectMapper = new ObjectMapper();
+            }
+
+            @Override
+            public void deliveryComplete(IMqttDeliveryToken iMqttDeliveryToken) {
+                System.out.println("Message livré : " + iMqttDeliveryToken.getMessageId());
+            }
+        });
+        mqttClient.subscribe("produit");
         return mqttClient;
     }
 
