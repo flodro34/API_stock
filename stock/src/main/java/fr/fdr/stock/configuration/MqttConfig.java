@@ -1,8 +1,12 @@
 package fr.fdr.stock.configuration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import fr.fdr.stock.manager.LogStockManager;
+import fr.fdr.stock.pojo.LogStock;
+import fr.fdr.stock.service.LogStockService;
 import org.eclipse.paho.client.mqttv3.*;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,6 +25,9 @@ public class MqttConfig {
 
     @Value("${mqtt.password}")
     private String password;
+
+    @Autowired
+    private LogStockManager logStockManager;
 
     @Bean
     public MqttClient mqttClient() throws MqttException {
@@ -49,6 +56,8 @@ public class MqttConfig {
 
                 //serialiser le message recu en objet java
                 ObjectMapper objectMapper = new ObjectMapper();
+                LogStock logStock = objectMapper.readValue(payload, LogStock.class);
+                logStockManager.processLog(logStock);
             }
 
             @Override
@@ -59,6 +68,8 @@ public class MqttConfig {
         mqttClient.subscribe("produit");
         return mqttClient;
     }
+
+
 
 
 }

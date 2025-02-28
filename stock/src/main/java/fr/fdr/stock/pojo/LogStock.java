@@ -8,8 +8,7 @@ import lombok.Setter;
 
 import java.time.LocalDateTime;
 
-@Getter
-@Setter
+
 @Entity
 @Table(name="log")
 public class LogStock {
@@ -38,4 +37,43 @@ public class LogStock {
     public LogStock() {
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public LocalDateTime getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDateTime date) {
+        this.date = date;
+    }
+
+    public Action getAction() {
+        return action;
+    }
+
+    public void setAction(Action action) {
+        this.action = action;
+    }
+
+    public Long getProduit_id() {
+        return produit_id;
+    }
+
+    public void setProduit_id(Long produit_id) {
+        this.produit_id = produit_id;
+    }
+
+    public Integer getQuantite() {
+        return quantite;
+    }
+
+    public void setQuantite(Integer quantite) {
+        this.quantite = quantite;
+    }
 }

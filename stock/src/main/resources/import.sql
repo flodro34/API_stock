@@ -1,0 +1,1 @@
+INSERT INTO produit(nom,description,prix,quantite) VALUES ('pen', 'blue pen', 1.5, 1);
